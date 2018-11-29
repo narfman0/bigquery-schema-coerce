@@ -9,6 +9,11 @@
 	"type": "INTEGER"
 },
 {
+	"mode": "NULLABLE",
+	"name": "value",
+	"type": "FLOAT"
+},
+{
 	"fields": [{
 			"mode": "NULLABLE",
 			"name": "type",

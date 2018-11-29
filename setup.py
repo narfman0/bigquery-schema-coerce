@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
-from bigquery_schema_coerce import __version__ as version
 
 
 setup(
     name="bigquery-schema-coerce",
-    version=version,
+    version="0.1.0",
     description=(
         "Force python dictionary to type convert into the given bigquery schema"
     ),

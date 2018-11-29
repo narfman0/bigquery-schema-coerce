@@ -1,1 +1,1 @@
-__version__ = '0.1.0'
+from bigquery_schema_coerce.core import *  # pragma: no cover

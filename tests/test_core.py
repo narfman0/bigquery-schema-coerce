@@ -2,10 +2,17 @@ import unittest
 
 from bigquery_schema_coerce import core
 
+FIXTURE_PATH = "tests/fixtures/schema.json"
+
 
 class TestCore(unittest.TestCase):
+    def test_convert_fields(self):
+        candidate = {"name": "name1", "value": "123,120.02", "number": "2"}
+        schema = core.parse_schema(path=FIXTURE_PATH)
+        result = core.convert_fields(candidate, schema)
+        self.assertAlmostEqual(123120.02, result["value"], places=2)
+
     def test_parse_schema(self):
-        fixture_path = "tests/fixtures/schema.json"
-        schema = list(core.parse_schema(path=fixture_path))
-        self.assertEqual(3, len(schema))
-        self.assertEqual(2, len(schema[2].fields))
+        schema = list(core.parse_schema(path=FIXTURE_PATH))
+        self.assertEqual(4, len(schema))
+        self.assertEqual(2, len(schema[3].fields))
