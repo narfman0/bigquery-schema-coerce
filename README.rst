@@ -19,7 +19,16 @@ Install via pip::
 Usage
 -----
 
-TODO
+Import and parse schema with::
+
+    import bigquery_schema_coerce as bqcoerce
+    schema = bqcoerce.parse_schema('schema.json')
+
+We may then type convert python objects (dictionaries) with::
+
+    result = bqcoerce.convert_fields(object, schema)
+
+Check our unit tests for a small example.
 
 Development
 -----------
@@ -36,6 +45,13 @@ Release
 To publish your plugin to pypi, sdist and wheels are (registered,) created and uploaded with::
 
     make release
+
+TODO
+----
+
+* Ingest schema from bigquery api
+* Deal with more complex records, perhaps GEOGRAPHY or ingesting a STRING and
+  ensuring common formats are OGC Simple Features Specification
 
 License
 -------
