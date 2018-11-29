@@ -12,6 +12,7 @@ class TestCore(unittest.TestCase):
             "value": "123,120.02",
             "number": "2",
             "series": [{"float": "123.2", "type": "type1", "time": "20181129T171218Z"}],
+            "single": {"float": "123.2", "type": "type1"},
         }
         schema = core.parse_schema(path=FIXTURE_PATH)
         result = core.convert_fields(candidate, schema)
@@ -20,5 +21,5 @@ class TestCore(unittest.TestCase):
 
     def test_parse_schema(self):
         schema = list(core.parse_schema(path=FIXTURE_PATH))
-        self.assertEqual(4, len(schema))
+        self.assertEqual(5, len(schema))
         self.assertEqual(3, len(schema[3].fields))

@@ -30,8 +30,11 @@ def convert_fields(candidate, schema):
             elif schema_field.field_type == "STRING":
                 candidate[schema_field.name] = str(candidate_attribute)
             elif schema_field.field_type == "RECORD":
-                for child in candidate_attribute:
-                    convert_fields(child, schema_field.fields)
+                if schema_field.mode == "REPEATED":
+                    for child in candidate_attribute:
+                        convert_fields(child, schema_field.fields)
+                else:
+                    convert_fields(candidate_attribute, schema_field.fields)
     return candidate
 
 

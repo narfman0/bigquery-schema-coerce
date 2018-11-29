@@ -1,36 +1,50 @@
 [{
-	"mode": "NULLABLE",
-	"name": "name",
-	"type": "STRING"
-},
-{
-	"mode": "NULLABLE",
-	"name": "number",
-	"type": "INTEGER"
-},
-{
-	"mode": "NULLABLE",
-	"name": "value",
-	"type": "FLOAT"
-},
-{
-	"fields": [{
-			"mode": "NULLABLE",
-			"name": "type",
-			"type": "STRING"
-		},
-		{
-			"mode": "NULLABLE",
-			"name": "float",
-			"type": "FLOAT"
-		},
-		{
-			"mode": "NULLABLE",
-			"name": "time",
-			"type": "STRING"
-		}
-	],
-	"mode": "REPEATED",
-	"name": "series",
-	"type": "RECORD"
-}]
+    "mode": "NULLABLE",
+    "name": "name",
+    "type": "STRING"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "number",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "value",
+    "type": "FLOAT"
+  },
+  {
+    "fields": [{
+      "mode": "NULLABLE",
+      "name": "type",
+      "type": "STRING"
+    }, {
+      "mode": "NULLABLE",
+      "name": "float",
+      "type": "FLOAT"
+    }, {
+      "mode": "NULLABLE",
+      "name": "time",
+      "type": "STRING"
+    }],
+    "mode": "REPEATED",
+    "name": "series",
+    "type": "RECORD"
+  },
+  {
+    "fields": [{
+        "mode": "NULLABLE",
+        "name": "type",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "float",
+        "type": "FLOAT"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "single",
+    "type": "RECORD"
+  }
+]
