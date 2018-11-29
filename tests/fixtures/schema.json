@@ -21,6 +21,11 @@
 		},
 		{
 			"mode": "NULLABLE",
+			"name": "float",
+			"type": "FLOAT"
+		},
+		{
+			"mode": "NULLABLE",
 			"name": "time",
 			"type": "STRING"
 		}

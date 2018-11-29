@@ -17,19 +17,21 @@ def convert_fields(candidate, schema):
     :rtype: dict
     """
     for schema_field in schema:
-        # TODO recursive fields
         candidate_attribute = candidate.get(schema_field.name, None)
         if candidate_attribute:
             if schema_field.field_type == "FLOAT":
                 if isinstance(candidate_attribute, str):
                     candidate_attribute = re.sub("[^0-9.]", "", candidate_attribute)
                 candidate[schema_field.name] = float(candidate_attribute)
-            if schema_field.field_type == "INTEGER":
+            elif schema_field.field_type == "INTEGER":
                 if isinstance(candidate_attribute, str):
                     candidate_attribute = re.sub("[^0-9.]", "", candidate_attribute)
                 candidate[schema_field.name] = int(candidate_attribute)
-            if schema_field.field_type == "STRING":
+            elif schema_field.field_type == "STRING":
                 candidate[schema_field.name] = str(candidate_attribute)
+            elif schema_field.field_type == "RECORD":
+                for child in candidate_attribute:
+                    convert_fields(child, schema_field.fields)
     return candidate
 
 
