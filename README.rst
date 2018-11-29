@@ -22,7 +22,7 @@ Usage
 Import and parse schema with::
 
     import bigquery_schema_coerce as bqcoerce
-    schema = bqcoerce.parse_schema('schema.json')
+    schema = bqcoerce.parse_schema(path='schema.json')
 
 We may then type convert python objects (dictionaries) with::
 
