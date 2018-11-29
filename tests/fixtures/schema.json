@@ -1,0 +1,26 @@
+[{
+	"mode": "NULLABLE",
+	"name": "name",
+	"type": "STRING"
+},
+{
+	"mode": "NULLABLE",
+	"name": "number",
+	"type": "INTEGER"
+},
+{
+	"fields": [{
+			"mode": "NULLABLE",
+			"name": "type",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "time",
+			"type": "STRING"
+		}
+	],
+	"mode": "REPEATED",
+	"name": "series",
+	"type": "RECORD"
+}]
