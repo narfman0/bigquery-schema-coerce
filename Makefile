@@ -39,13 +39,13 @@ lock-requirements:
 run-test:
 	pipenv run pytest --flake8 --black --cov=bigquery_schema_coerce --cov-report term-missing tests/
 
-release: clean ## package and upload a release
-	pipenv run python setup.py sdist upload
-	pipenv run python setup.py bdist_wheel upload
+release-test: clean
+	pipenv run python setup.py sdist bdist_wheel
+	pipenv run twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-sdist: clean ## package
-	pipenv run python setup.py sdist
-	ls -l dist
+release-prod: clean
+	pipenv run python setup.py sdist bdist_wheel
+	pipenv run twine upload dist/*
 
 test: init-dev run-test
 t: run-test

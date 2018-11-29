@@ -11,6 +11,7 @@ pytest-cov = "*"
 "pytest-flake8" = "*"
 pytest-black = "*"
 wheel = "*"
+twine = "*"
 
 [requires]
 python_version = "3.7"
