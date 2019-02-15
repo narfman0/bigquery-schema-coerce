@@ -9,7 +9,15 @@ with warnings.catch_warnings():
     from google.cloud.bigquery.schema import SchemaField
 
 
-def convert_fields(candidate, schema):
+def coerce(candidate, schema):
+    """ Convert and project fields in candidate against schema """
+    schema = list(schema)
+    convert(candidate, schema)
+    project(candidate, schema)
+    return candidate
+
+
+def convert(candidate, schema):
     """ Type convert each attribute in the candidate object to match
     the given schema
     :param dict candidate: Object we want to type convert to ensure we
@@ -19,7 +27,7 @@ def convert_fields(candidate, schema):
     :rtype: dict
     """
     for schema_field in schema:
-        candidate_attribute = candidate.get(schema_field.name, None)
+        candidate_attribute = candidate.get(schema_field.name)
         if candidate_attribute:
             if schema_field.field_type == "FLOAT":
                 if isinstance(candidate_attribute, str):
@@ -38,9 +46,31 @@ def convert_fields(candidate, schema):
             elif schema_field.field_type == "RECORD":
                 if schema_field.mode == "REPEATED":
                     for child in candidate_attribute:
-                        convert_fields(child, schema_field.fields)
+                        convert(child, schema_field.fields)
                 else:
-                    convert_fields(candidate_attribute, schema_field.fields)
+                    convert(candidate_attribute, schema_field.fields)
+    return candidate
+
+
+def project(candidate, schema):
+    """ Remove any keys that are not represented in the schema
+    :return Converted object
+    :rtype: dict
+    """
+    schema_keys = set()
+    for schema_field in schema:
+        candidate_attribute = candidate.get(schema_field.name)
+        if not candidate_attribute:
+            continue
+        if schema_field.field_type == "RECORD":
+            if schema_field.mode == "REPEATED":
+                for child in candidate_attribute:
+                    project(child, schema_field.fields)
+            else:
+                project(candidate_attribute, schema_field.fields)
+        schema_keys.add(schema_field.name)
+    for removal in set(candidate.keys()) - schema_keys:
+        del candidate[removal]
     return candidate
 
 
