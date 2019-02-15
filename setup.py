@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bigquery-schema-coerce",
-    version="1.0.0",
+    version="1.0.1",
     description=(
         "Force python dictionary to type convert and project onto the given schema"
     ),
@@ -21,6 +21,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=True,
-    install_requires=["google-cloud-bigquery"],
+    install_requires=["google-cloud-bigquery", "python-dateutil"],
     test_suite="tests",
 )
