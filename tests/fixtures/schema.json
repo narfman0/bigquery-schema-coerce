@@ -14,6 +14,11 @@
     "type": "FLOAT"
   },
   {
+    "mode": "NULLABLE",
+    "name": "timestamp",
+    "type": "TIMESTAMP"
+  },
+  {
     "fields": [{
       "mode": "NULLABLE",
       "name": "type",

@@ -49,6 +49,7 @@ To publish your plugin to pypi, sdist and wheels are (registered,) created and u
 TODO
 ----
 
+* If field is nullable and empty (e.g. ""), remove
 * Ingest schema from bigquery api
 * Deal with more complex records, perhaps GEOGRAPHY or ingesting a STRING and
   ensuring common formats are OGC Simple Features Specification

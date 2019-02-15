@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bigquery-schema-coerce",
-    version="0.2.0",
+    version="0.3.0",
     description=(
         "Force python dictionary to type convert into the given bigquery schema"
     ),

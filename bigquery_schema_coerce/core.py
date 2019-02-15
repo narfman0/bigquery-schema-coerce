@@ -2,6 +2,8 @@ import json
 import re
 import warnings
 
+from dateutil.parser import parse as parse_date
+
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
     from google.cloud.bigquery.schema import SchemaField
@@ -29,6 +31,10 @@ def convert_fields(candidate, schema):
                 candidate[schema_field.name] = int(candidate_attribute)
             elif schema_field.field_type == "STRING":
                 candidate[schema_field.name] = str(candidate_attribute)
+            elif schema_field.field_type == "TIMESTAMP":
+                candidate[schema_field.name] = parse_date(
+                    candidate_attribute
+                ).isoformat()
             elif schema_field.field_type == "RECORD":
                 if schema_field.mode == "REPEATED":
                     for child in candidate_attribute:
