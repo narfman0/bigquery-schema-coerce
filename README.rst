@@ -26,9 +26,10 @@ Import and parse schema with::
 
 We may then type convert python objects (dictionaries) with::
 
-    result = bqcoerce.convert_fields(object, schema)
+    result = bqcoerce.coerce(object, schema)
 
-Check our unit tests for a small example.
+Check our unit tests for a small example. We can limit to
+type conversion or projecting using `bqcoerce.convert` or `bqcoerce.project`.
 
 Development
 -----------
