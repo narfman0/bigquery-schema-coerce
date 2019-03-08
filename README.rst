@@ -22,7 +22,7 @@ Usage
 Import and parse schema with::
 
     import bigquery_schema_coerce as bqcoerce
-    schema = bqcoerce.parse_schema(path='schema.json')
+    schema = list(bqcoerce.parse_schema(path='schema.json'))
 
 We may then type convert python objects (dictionaries) with::
 
@@ -30,6 +30,10 @@ We may then type convert python objects (dictionaries) with::
 
 Check our unit tests for a small example. We can limit to
 type conversion or projecting using `bqcoerce.convert` or `bqcoerce.project`.
+
+Note: parse_schema returns a generator, which can only be iterated once. Since with bigquery
+a user would likely be iterating over many objects, it is wise to by default create a list,
+but the option remains if performance is needed to only use the generator.
 
 Development
 -----------
