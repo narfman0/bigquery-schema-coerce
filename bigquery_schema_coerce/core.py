@@ -1,8 +1,7 @@
 import json
-import re
 import warnings
 
-from dateutil.parser import parse as parse_date
+from bigquery_schema_coerce import types
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
@@ -30,19 +29,21 @@ def convert(candidate, schema):
         candidate_attribute = candidate.get(schema_field.name)
         if candidate_attribute:
             if schema_field.field_type == "FLOAT":
-                if isinstance(candidate_attribute, str):
-                    candidate_attribute = re.sub("[^0-9.]", "", candidate_attribute)
-                candidate[schema_field.name] = float(candidate_attribute)
+                candidate[schema_field.name] = types.convert_float_field(
+                    schema_field, candidate_attribute
+                )
             elif schema_field.field_type == "INTEGER":
-                if isinstance(candidate_attribute, str):
-                    candidate_attribute = re.sub("[^0-9.]", "", candidate_attribute)
-                candidate[schema_field.name] = int(candidate_attribute)
+                candidate[schema_field.name] = types.convert_int_field(
+                    schema_field, candidate_attribute
+                )
             elif schema_field.field_type == "STRING":
-                candidate[schema_field.name] = str(candidate_attribute)
+                candidate[schema_field.name] = types.convert_string_field(
+                    schema_field, candidate_attribute
+                )
             elif schema_field.field_type == "TIMESTAMP":
-                candidate[schema_field.name] = parse_date(
-                    candidate_attribute
-                ).isoformat()
+                candidate[schema_field.name] = types.convert_timestamp_field(
+                    schema_field, candidate_attribute
+                )
             elif schema_field.field_type == "RECORD":
                 if schema_field.mode == "REPEATED":
                     for child in candidate_attribute:
