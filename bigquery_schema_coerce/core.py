@@ -32,6 +32,10 @@ def convert(candidate, schema):
                 candidate[schema_field.name] = types.convert_float_field(
                     schema_field, candidate_attribute
                 )
+            elif schema_field.field_type == "BOOLEAN":
+                candidate[schema_field.name] = types.convert_bool_field(
+                    schema_field, candidate_attribute
+                )
             elif schema_field.field_type == "INTEGER":
                 candidate[schema_field.name] = types.convert_int_field(
                     schema_field, candidate_attribute

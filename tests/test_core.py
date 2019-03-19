@@ -13,6 +13,7 @@ class TestCore(unittest.TestCase):
         candidate = {
             "name": "name1",
             "value": "123,120.02",
+            "boolean": "T",
             "number": "2",
             "timestamp": "Feb 1 2019, 1:00",
             "series": [
@@ -29,11 +30,13 @@ class TestCore(unittest.TestCase):
         self.assertEqual("2019-02-01T01:00:00", result["timestamp"])
         self.assertEqual(3, len(result["series"][0]))
         self.assertNotIn("removal", result["series"][0])
+        self.assertTrue(result["boolean"])
 
     def test_convert(self):
         candidate = {
             "name": "name1",
             "value": "123,120.02",
+            "boolean": "No",
             "number": "2",
             "timestamp": "Feb 1 2019, 1:00",
             "series": [
@@ -50,6 +53,7 @@ class TestCore(unittest.TestCase):
         self.assertAlmostEqual(123120.02, result["value"], places=2)
         self.assertAlmostEqual(123.2, result["series"][0]["float"], places=1)
         self.assertEqual("2019-02-01T01:00:00", result["timestamp"])
+        self.assertFalse(result["boolean"])
 
     def test_project(self):
         candidate = {
@@ -68,5 +72,5 @@ class TestCore(unittest.TestCase):
 
     def test_parse_schema(self):
         schema = list(core.parse_schema(path=FIXTURE_PATH))
-        self.assertEqual(6, len(schema))
-        self.assertEqual(3, len(schema[4].fields))
+        self.assertEqual(7, len(schema))
+        self.assertEqual(3, len(schema[5].fields))
